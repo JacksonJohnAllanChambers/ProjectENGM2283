@@ -14,7 +14,7 @@ int main() {
     LinkedList library;
     char choice;
 
-    do {
+    while(1) {
         cout << "\n\n---------------------Library Menu-------------------" << endl;
         cout << "1. Store Item" << endl;
         cout << "2. Retrieve Item" << endl;
@@ -25,28 +25,20 @@ int main() {
         cout << "7. Clear Library" << endl;
         cout << "8. Print All Items" << endl;
         cout << "0. Exit" << endl;
+        
         cout << "Enter your choice: ";
         cin >> choice;
 
-        switch (choice) {
-            case '1': {
+        if (choice = 1  ) {
                 int itemType;
-                do {
-                    cout << "\n---------------------Item Menu-------------------\n";
-                    cout << "1. Book" << endl;
-                    cout << "2. CD" << endl;
-                    cout << "3. Movie" << endl;
-                    cout << "Enter here: ";
-                    cin >> itemType;
+            
+                cout << endl << "---------------------Item Menu-------------------"<< endl;
+                cout << "1. Book" << endl;
+                cout << "2. CD" << endl;
+                cout << "3. Movie" << endl;
+                cout << "Enter here: ";
+                cin >> itemType;
 
-                    if (cin.fail() || (itemType < 1 || itemType > 3)) {
-                        cout << "Invalid input. Please enter an integer between 1 and 3.\n";
-                        cin.clear(); // Clear the error flag
-                        cin.ignore(1000, '\n'); // Discard invalid input
-                    } else {
-                        break; // Valid input, exit the loop
-                    }
-                } while (true);
 
                 string title, author, publisher, artist, producer, director;
                 int genre, lengthInPages, length;
@@ -56,47 +48,17 @@ int main() {
                 string actor;
 
                 cout << "Enter title: ";
-                cin.ignore(); // Ignore leftover newline
                 getline(cin, title);
 
-                do {
-                    cout << "Enter genre (Dewey decimal system): ";
-                    cin >> genre;
-                    if (cin.fail() || genre < 0 || genre > 999){
-                        cout << "Invalid input. Please enter an integer between 0 - 999.\n";
-                        cin.clear();
-                        cin.ignore(1000, '\n'); // Clear invalid input
-                    } else {
-                        break;
-                    }
-                } while (true);
                 
-                do{
+                    cout << "Enter genre (Dewey decimal system): ";
+                    cin >> genre;                   
                     cout << "Enter publishing date (month day year): ";
                     cin >> month >> day >> year;
-                    if (cin.fail() || month < 1 || month > 12 || day < 1 ||
-                     day > 31 || year < 1 || year > 2025){
-                        cout << "Invalid input. Please enter a integers; month(1-12), day(1-31), year(0-2025)." << endl;
-                        cin.clear();
-                        cin.ignore(1000, '\n'); // Clear invalid input
-                    } else {
-                        break;
-                    }
-                } while (true);
-
-                do {
                     cout << "Enter location (floor section aisle shelf): ";
                     cin >> floor >> section >> aisle >> shelf;
 
-                    // Validate input
-                    if (cin.fail() || floor < 1 || floor > 30 || section < 'A' || section > 'Z' || aisle < 'A' || aisle > 'Z' || shelf < 1 || shelf > 6) {
-                        cout << "Invalid input. Please enter; floor(1-30), section(A-Z), aisle(A-Z), shelf(1-6)." << endl;
-                        cin.clear();
-                        cin.ignore(1000, '\n'); // Clear invalid input
-                    } else {
-                        break;
-                    }
-                } while (true);
+            
 
                 Date created(month, day, year);
                 Location location(floor, section, aisle, shelf);
