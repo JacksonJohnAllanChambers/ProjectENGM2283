@@ -9,12 +9,11 @@ private:
         Item* data;
         Node* next;
     };
-    Node* head;
+    Node* start;
     int count;
 
 public:
     LinkedList();
-    ~LinkedList();
 
     void store(Item* item);
     Item* retrieve(string title);
@@ -27,7 +26,6 @@ public:
     void printAllItems() const;
 
 private:
-    // Helper function for sorting (you can choose an algorithm)
     void sortList();
 };
 
