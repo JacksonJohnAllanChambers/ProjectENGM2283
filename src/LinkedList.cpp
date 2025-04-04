@@ -1,7 +1,7 @@
 #include "LinkedList.h"
 #include <iostream>
 
-LinkedList::LinkedList() : head(nullptr), count(0) {}
+LinkedList::LinkedList() : start(NULL), count(0) {}
 
 LinkedList::~LinkedList() {
     clear();
@@ -10,20 +10,20 @@ LinkedList::~LinkedList() {
 void LinkedList::store(Item* item) {
     Node* newNode = new Node;
     newNode->data = item;
-    newNode->next = head;
-    head = newNode;
+    newNode->next = start;
+    start = newNode;
     count++;
 }
 
 Item* LinkedList::retrieve(string title) {
-    Node* current = head;
-    while (current != nullptr) {
+    Node* current = start;
+    while (current != NULL) {
         if (current->data->getTitle() == title) {
             return current->data;
         }
         current = current->next;
     }
-    return nullptr; // Not found
+    return NULL; // Not found
 }
 
 void LinkedList::sort() {
@@ -31,14 +31,14 @@ void LinkedList::sort() {
 }
 
 bool LinkedList::remove(string title) {
-    Node* current = head;
-    Node* previous = nullptr;
+    Node* current = start;
+    Node* previous = NULL;
 
-    while (current != nullptr) {
+    while (current != NULL) {
         if (current->data->getTitle() == title) {
-            if (previous == nullptr) {
-                // Removing the head
-                head = current->next;
+            if (previous == NULL) {
+                // Removing the start
+                start = current->next;
             } else {
                 previous->next = current->next;
             }
@@ -58,43 +58,43 @@ int LinkedList::countItems() const {
 }
 
 bool LinkedList::isEmpty() const {
-    return head == nullptr;
+    return start == NULL;
 }
 
 void LinkedList::clear() {
-    Node* current = head;
-    while (current != nullptr) {
+    Node* current = start;
+    while (current != NULL) {
         Node* next = current->next;
         delete current->data;
         delete current;
         current = next;
     }
-    head = nullptr;
+    start = NULL;
     count = 0;
 }
 
 void LinkedList::sortList() {
     // This is a placeholder implementation (Bubble Sort):
-    if (head == nullptr || head->next == nullptr) {
+    if (start == NULL || start->next == NULL) {
         return; // Already sorted or empty
     }
 
     bool swapped;
     do {
         swapped = false;
-        Node* current = head;
-        Node* previous = nullptr;
+        Node* current = start;
+        Node* previous = NULL;
 
-        while (current->next != nullptr) {
+        while (current->next != NULL) {
             if (current->data->getTitle() > current->next->data->getTitle()) {
                 // Swap nodes
                 Node* nextNode = current->next;
                 current->next = nextNode->next;
                 nextNode->next = current;
 
-                if (previous == nullptr) {
-                    // Swapping the head
-                    head = nextNode;
+                if (previous == NULL) {
+                    // Swapping the start
+                    start = nextNode;
                 } else {
                     previous->next = nextNode;
                 }
@@ -110,8 +110,8 @@ void LinkedList::sortList() {
 }
 
 void LinkedList::printAllItems() const {
-    Node* current = head;
-    while (current != nullptr) {
+    Node* current = start;
+    while (current != NULL) {
         current->data->print();
         cout << endl;
         current = current->next;
