@@ -32,7 +32,7 @@ int main() {
             case '1': {
                 int itemType;
                 do {
-                    cout << "\n\n---------------------Item Menu-------------------\n";
+                    cout << "\n---------------------Item Menu-------------------\n";
                     cout << "1. Book" << endl;
                     cout << "2. CD" << endl;
                     cout << "3. Movie" << endl;
