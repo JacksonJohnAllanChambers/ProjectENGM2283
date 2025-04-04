@@ -13,11 +13,11 @@ int Location::getFloor() const {
     return floor;
 }
 
-char Location::getSection() const { // Updated return type
+char Location::getSection() const {
     return section;
 }
 
-char Location::getAisle() const { // Updated return type
+char Location::getAisle() const {
     return aisle;
 }
 

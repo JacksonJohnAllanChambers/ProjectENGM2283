@@ -74,7 +74,6 @@ void LinkedList::clear() {
 }
 
 void LinkedList::sortList() {
-    // Implement your sorting algorithm here (e.g., bubble sort, insertion sort)
     // This is a placeholder implementation (Bubble Sort):
     if (head == nullptr || head->next == nullptr) {
         return; // Already sorted or empty

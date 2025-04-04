@@ -7,8 +7,8 @@ using namespace std;
 class Location {
 private:
     int floor;
-    char section; // Changed from string to char
-    char aisle;   // Changed from string to char
+    char section;
+    char aisle;
     int shelf;
 
 public:
@@ -17,8 +17,8 @@ public:
 
     // Getters
     int getFloor() const;
-    char getSection() const; // Updated return type
-    char getAisle() const;   // Updated return type
+    char getSection() const;
+    char getAisle() const;
     int getShelf() const;
 };
 

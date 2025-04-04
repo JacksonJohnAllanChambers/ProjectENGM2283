@@ -182,7 +182,7 @@ int main() {
                             }
                         } while (true);
                         newItem = new CD(title, genre, created, location, lengthFloat, artist, producer);
-                        break; // Add this
+                        break;
                     }
                     case 3: {
                         do{
@@ -220,7 +220,7 @@ int main() {
                             cast.push_back(actor); // Add the actor to the cast list
                         } while (true);
                         newItem = new Movie(title, genre, created, location, length, director, cast);
-                        break; // Add this
+                        break;
                     }
                     default:
                         cout << "Invalid item type.\n";

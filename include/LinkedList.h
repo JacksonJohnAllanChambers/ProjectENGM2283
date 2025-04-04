@@ -24,7 +24,7 @@ public:
     bool isEmpty() const;
     void clear();
 
-    void printAllItems() const; // New method
+    void printAllItems() const;
 
 private:
     // Helper function for sorting (you can choose an algorithm)
