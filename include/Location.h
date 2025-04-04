@@ -15,7 +15,6 @@ public:
     Location(int floor = 1, char section = 'A', char aisle = 'A', int shelf = 1);
     void print() const;
 
-    // Getters
     int getFloor() const;
     char getSection() const;
     char getAisle() const;

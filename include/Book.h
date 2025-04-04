@@ -15,7 +15,6 @@ public:
          int lengthInPages = 0, string author = "Unknown", string publisher = "Unknown");
     void print() const override;
 
-    // Getters
     int getLengthInPages() const;
     string getAuthor() const;
     string getPublisher() const;

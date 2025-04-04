@@ -72,8 +72,8 @@ int main() {
                             cin >> lengthInPages;
                             if (cin.fail()) {
                                 cout << "Invalid input. Please enter an integer." << endl;
-                                cin.clear();
-                                cin.ignore(1000, '\n'); // Clear invalid input
+                                cin.clear(); // Clear invalid input
+                                cin.ignore(1000, '\n'); // Ignore leftover newline
                             } else{
                                 break;
                             }
@@ -81,12 +81,12 @@ int main() {
 
                         do {
                             cout << "Enter author: ";
-                            cin.ignore(); // Ignore leftover newline
+                            cin.ignore();
                             getline(cin, author);
                             if (cin.fail()) {
                                 cout << "Invalid input. Please enter a name.\n";
                                 cin.clear();
-                                cin.ignore(1000, '\n'); // Clear invalid input
+                                cin.ignore(1000, '\n');
                             } else {
                                 break;
                             }
@@ -97,13 +97,13 @@ int main() {
                             if (cin.fail()) {
                                 cout << "Invalid input. Please enter a name.\n";
                                 cin.clear();
-                                cin.ignore(1000, '\n'); // Clear invalid input
+                                cin.ignore(1000, '\n');
                             } else {
                                 break;
                             }
                         } while (true);
                         newItem = new Book(title, genre, created, location, lengthInPages, author, publisher);
-                        break; // Add this
+                        break;
                     }
                     case 2: {
                         float lengthFloat;
@@ -114,7 +114,7 @@ int main() {
                             if (cin.fail()) {
                                 cout << "Invalid input. Please enter a number.\n";
                                 cin.clear();
-                                cin.ignore(1000, '\n'); // Clear invalid input
+                                cin.ignore(1000, '\n');
                             } else {
                                 break;
                             }
@@ -122,12 +122,12 @@ int main() {
 
                         do {
                             cout << "Enter artist: ";
-                            cin.ignore(); // Ignore leftover newline
+                            cin.ignore();
                             getline(cin, artist);
                             if(cin.fail()){
                                 cout << "Invalid input. Please enter a name.\n";
                                 cin.clear();
-                                cin.ignore(1000, '\n'); // Clear invalid input
+                                cin.ignore(1000, '\n');
                             } else {
                                 break;
                             }
@@ -139,7 +139,7 @@ int main() {
                             if(cin.fail()){
                                 cout << "Invalid input. Please enter a name.\n";
                                 cin.clear();
-                                cin.ignore(1000, '\n'); // Clear invalid input
+                                cin.ignore(1000, '\n');
                             } else {
                                 break;
                             }
@@ -154,7 +154,7 @@ int main() {
                             if (cin.fail()) {
                                 cout << "Invalid input. Please enter in integers.\n";
                                 cin.clear();
-                                cin.ignore(1000, '\n'); // Clear invalid input
+                                cin.ignore(1000, '\n'); 
                             } else {
                                 break;
                             }
@@ -162,12 +162,12 @@ int main() {
 
                         do {
                             cout << "Enter director: ";
-                            cin.ignore(); // Ignore leftover newline
+                            cin.ignore();
                             getline(cin, director);
                             if (cin.fail()) {
                                 cout << "Invalid input. Please enter a name.\n";
                                 cin.clear();
-                                cin.ignore(1000, '\n'); // Clear invalid input
+                                cin.ignore(1000, '\n');
                             } else {
                                 break;
                             }
@@ -206,7 +206,7 @@ int main() {
                     if (cin.fail()) {
                         cout << "Invalid input. Please enter a title.\n";
                         cin.clear();
-                        cin.ignore(1000, '\n'); // Clear invalid input
+                        cin.ignore(1000, '\n');
                     } else {
                         break;
                     }
@@ -229,7 +229,7 @@ int main() {
             case '4': {
                 string removeTitle;
                 cout << "Enter title to remove: ";
-                cin.ignore(); // Ignore leftover newline
+                cin.ignore();
                 getline(cin, removeTitle);
                 if (library.remove(removeTitle)) {
                     cout << "Item removed successfully.\n";

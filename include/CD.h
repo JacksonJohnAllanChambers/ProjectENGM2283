@@ -15,7 +15,6 @@ public:
        float length = 0.0f, string artist = "Unknown", string producer = "Unknown");
     void print() const override;
 
-    // Getters
     float getLength() const;
     string getArtist() const;
     string getProducer() const;

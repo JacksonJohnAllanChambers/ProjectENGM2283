@@ -16,7 +16,6 @@ public:
           int length = 0, string director = "Unknown", vector<string> cast = {});
     void print() const override;
 
-    // Getters
     int getLength() const;
     string getDirector() const;
     vector<string> getCast() const;
