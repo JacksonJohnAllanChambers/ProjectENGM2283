@@ -50,7 +50,7 @@ int main() {
                 string title, author, publisher, artist, producer, director;
                 int genre, lengthInPages, length;
                 int month, day, year, floor, shelf;
-                string section, aisle;
+                char section, aisle;
                 vector<string> cast;
                 string actor;
 
@@ -68,7 +68,7 @@ int main() {
                     } else {
                         break;
                     }
-                } (while true);
+                } while (true);
                 
                 do{
                     cout << "Enter publishing date (month day year): ";
@@ -81,20 +81,21 @@ int main() {
                     } else {
                         break;
                     }
-                } (while true);
+                } while (true);
 
                 do {
                     cout << "Enter location (floor section aisle shelf): ";
                     cin >> floor >> section >> aisle >> shelf;
-                    if (cin.fail() || floor < 1 || floor > 30 || section < A ||
-                    section > Z || aisle < A || aisle > Z || shelf < 1 || shelf > 6) {
+
+                    // Validate input
+                    if (cin.fail() || floor < 1 || floor > 30 || section < 'A' || section > 'Z' || aisle < 'A' || aisle > 'Z' || shelf < 1 || shelf > 6) {
                         cout << "Invalid input. Please enter; floor(1-30), section(A-Z), aisle(A-Z), shelf(1-6)." << endl;
                         cin.clear();
                         cin.ignore(1000, '\n'); // Clear invalid input
                     } else {
                         break;
                     }
-                } (while true);
+                } while (true);
 
                 Date created(month, day, year);
                 Location location(floor, section, aisle, shelf);
@@ -113,7 +114,7 @@ int main() {
                             } else{
                                 break;
                             }
-                        } (while true);
+                        } while (true);
 
                         do {
                             cout << "Enter author: ";
@@ -126,7 +127,7 @@ int main() {
                             } else {
                                 break;
                             }
-                        } (while true);
+                        } while (true);
                         do {
                             cout << "Enter publisher: ";
                             getline(cin, publisher);
@@ -137,8 +138,9 @@ int main() {
                             } else {
                                 break;
                             }
-                        } (while true);
+                        } while (true);
                         newItem = new Book(title, genre, created, location, lengthInPages, author, publisher);
+                        break; // Add this
                     }
                     case 2: {
                         float lengthFloat;
@@ -153,7 +155,7 @@ int main() {
                             } else {
                                 break;
                             }
-                        } (while true);
+                        } while (true);
 
                         do {
                             cout << "Enter artist: ";
@@ -166,7 +168,7 @@ int main() {
                             } else {
                                 break;
                             }
-                        } (while true);
+                        } while (true);
 
                         do{
                             cout << "Enter producer: ";
@@ -178,8 +180,9 @@ int main() {
                             } else {
                                 break;
                             }
-                        } (while true);
+                        } while (true);
                         newItem = new CD(title, genre, created, location, lengthFloat, artist, producer);
+                        break; // Add this
                     }
                     case 3: {
                         do{
@@ -192,7 +195,7 @@ int main() {
                             } else {
                                 break;
                             }
-                        } (while true);
+                        } while (true);
 
                         do {
                             cout << "Enter director: ";
@@ -205,32 +208,19 @@ int main() {
                             } else {
                                 break;
                             }
-                        } (while true);
-                        do{
-                            cout << "Enter cast (name name name...):\n";
-                            
-                            if (cin.fail()) {
-                                cout << "Invalid input. Please enter a names.\n";
-                                cin.clear();
-                                cin.ignore(1000, '\n'); // Clear invalid input
-                            } else {
-                                break;
-                            }
-                        } while (true)
+                        } while (true);
+                        vector<string> cast; // Vector to store cast members
                         do {
-                            cout << "Enter cast (name name name...):\n";
-                            getline(cin, cast);
-                            if (cin.fail()) {
-                                cout << "Invalid input. Please enter names.\n";
-                                cin.clear();
-                                cin.ignore(1000, '\n'); // Clear invalid input
-                            } else if (cast == "done") {
+                            cout << "Enter cast (type 'done' to finish): ";
+                            string actor; // Temporary variable to store input
+                            getline(cin, actor);
+                            if (actor == "done") {
                                 break; // Exit the loop when the user types "done"
                             }
-                            cast.push_back(cast); // Add the actor to the cast list
-                        } (while true)
+                            cast.push_back(actor); // Add the actor to the cast list
+                        } while (true);
                         newItem = new Movie(title, genre, created, location, length, director, cast);
-                        break;
+                        break; // Add this
                     }
                     default:
                         cout << "Invalid item type.\n";
@@ -257,7 +247,7 @@ int main() {
                     } else {
                         break;
                     }
-                } (while true);
+                } while (true);
                 Item* retrievedItem = library.retrieve(searchTitle);
                 if (retrievedItem != nullptr) {
                     cout << "Item found:\n";

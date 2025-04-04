@@ -1,23 +1,23 @@
 #include "Location.h"
 #include <iostream>
 
-Location::Location(int floor, string section, string aisle, int shelf)
+Location::Location(int floor, char section, char aisle, int shelf)
     : floor(floor), section(section), aisle(aisle), shelf(shelf) {}
 
 void Location::print() const {
     cout << "Floor: " << floor << ", Section: " << section
-              << ", Aisle: " << aisle << ", Shelf: " << shelf;
+         << ", Aisle: " << aisle << ", Shelf: " << shelf;
 }
 
 int Location::getFloor() const {
     return floor;
 }
 
-string Location::getSection() const {
+char Location::getSection() const { // Updated return type
     return section;
 }
 
-string Location::getAisle() const {
+char Location::getAisle() const { // Updated return type
     return aisle;
 }
 

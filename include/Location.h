@@ -1,25 +1,24 @@
 #ifndef LOCATION_H
 #define LOCATION_H
 
-#include <string>
 #include <iostream>
 using namespace std;
 
 class Location {
 private:
     int floor;
-    string section;
-    string aisle;
+    char section; // Changed from string to char
+    char aisle;   // Changed from string to char
     int shelf;
 
 public:
-    Location(int floor = 1, string section = "General", string aisle = "A", int shelf = 1);
+    Location(int floor = 1, char section = 'A', char aisle = 'A', int shelf = 1);
     void print() const;
 
     // Getters
     int getFloor() const;
-    string getSection() const;
-    string getAisle() const;
+    char getSection() const; // Updated return type
+    char getAisle() const;   // Updated return type
     int getShelf() const;
 };
 
