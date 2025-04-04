@@ -5,7 +5,8 @@
 
 class LinkedList {
 private:
-    struct Node {
+    class Node {
+    public:
         Item* data;
         Node* next;
     };
