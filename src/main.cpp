@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <limits> // Required for numeric_limits
 
 #include "LinkedList.h"
 #include "Book.h"
@@ -11,52 +10,42 @@
 
 using namespace std;
 
-// Function to clear the input buffer
-void clearInputBuffer() {
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-}
-
 int main() {
     LinkedList library;
-    int choice;
+    char choice;
 
     do {
-        cout << "\nLibrary Menu:\n";
-        cout << "1. Store Item\n";
-        cout << "2. Retrieve Item\n";
-        cout << "3. Sort Items\n";
-        cout << "4. Remove Item\n";
-        cout << "5. Count Items\n";
-        cout << "6. Is Empty?\n";
-        cout << "7. Clear Library\n";
-        cout << "8. Print All Items\n";
-        cout << "0. Exit\n";
+        cout << "---------------------Library Menu-------------------" << endl;
+        cout << "1. Store Item" << endl;
+        cout << "2. Retrieve Item" << endl;
+        cout << "3. Sort Items" << endl;
+        cout << "4. Remove Item" << endl;
+        cout << "5. Count Items" << endl;
+        cout << "6. Is Empty?" << endl;
+        cout << "7. Clear Library" << endl;
+        cout << "8. Print All Items" << endl;
+        cout << "0. Exit" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
 
-        // Validate that the input is an integer
-        if (cin.fail()) {
-            cout << "Invalid input. Please enter an integer.\n";
-            cin.clear(); // Clear error flags
-            clearInputBuffer(); // Discard invalid input
-            choice = -1;       // Force the loop to repeat
-        } else {
-            clearInputBuffer(); // Clear any remaining characters from the input buffer
-        }
-
         switch (choice) {
-            case 1: {
+            case '1': {
                 int itemType;
-                cout << "Enter item type (1: Book, 2: CD, 3: Movie): ";
-                cin >> itemType;
+                do {
+                    cout << "'\n'---------------------Item Menu-------------------";
+                    cout << "1. Book" << endl;
+                    cout << "2. CD" << endl;
+                    cout << "3. Movie" << endl;
+                    cin >> itemType;
 
-                if (cin.fail()) {
-                    cout << "Invalid input. Please enter an integer.\n";
-                    cin.clear();
-                    clearInputBuffer();
-                    break;
-                }
-                clearInputBuffer();
+                    if (cin.fail() || (itemType < 1 || itemType > 3)) {
+                        cout << "Invalid input. Please enter an integer between 1 and 3.\n";
+                        cin.clear(); // Clear the error flag
+                        cin.ignore(1000, '\n'); // Discard invalid input
+                    } else {
+                        break; // Valid input, exit the loop
+                    }
+                } while (true);
 
                 string title, author, publisher, artist, producer, director;
                 int genre, lengthInPages, length;
@@ -66,42 +55,46 @@ int main() {
                 string actor;
 
                 cout << "Enter title: ";
+                cin.ignore(); // Ignore leftover newline
                 getline(cin, title);
-                cout << "Enter genre (Dewey decimal system): ";
-                cin >> genre;
 
-                if (cin.fail()) {
-                    cout << "Invalid input. Please enter an integer.\n";
-                    cin.clear();
-                    clearInputBuffer();
-                    break;
-                }
-                clearInputBuffer();
+                do {
+                    cout << "Enter genre (Dewey decimal system): ";
+                    cin >> genre;
+                    if (cin.fail() || genre < 0 || genre > 999){
+                        cout << "Invalid input. Please enter an integer between 0 - 999.\n";
+                        cin.clear();
+                        cin.ignore(1000, '\n'); // Clear invalid input
+                    } else {
+                        break;
+                    }
+                } (while true);
+                
+                do{
+                    cout << "Enter publishing date (month day year): ";
+                    cin >> month >> day >> year;
+                    if (cin.fail() || month < 1 || month > 12 || day < 1 ||
+                     day > 31 || year < 1 || year > 2025){
+                        cout << "Invalid input. Please enter a integers; month(1-12), day(1-31), year(0-2025)." << endl;
+                        cin.clear();
+                        cin.ignore(1000, '\n'); // Clear invalid input
+                    } else {
+                        break;
+                    }
+                } (while true);
 
-                cout << "Enter creation date (month day year): ";
-                cin >> month >> day >> year;
-
-                if (cin.fail()) {
-                    cout << "Invalid input. Please enter integers.\n";
-                    cin.clear();
-                    clearInputBuffer();
-                    break;
-                }
-                clearInputBuffer();
-
-                cout << "Enter location (floor section aisle shelf): ";
-                cin >> floor;
-                getline(cin, section, ' '); // Read until space
-                getline(cin, aisle, ' ');   // Read until space
-                cin >> shelf;
-
-                if (cin.fail()) {
-                    cout << "Invalid input. Please enter valid values.\n";
-                    cin.clear();
-                    clearInputBuffer();
-                    break;
-                }
-                clearInputBuffer();
+                do {
+                    cout << "Enter location (floor section aisle shelf): ";
+                    cin >> floor >> section >> aisle >> shelf;
+                    if (cin.fail() || floor < 1 || floor > 30 || section < A ||
+                    section > Z || aisle < A || aisle > Z || shelf < 1 || shelf > 6) {
+                        cout << "Invalid input. Please enter; floor(1-30), section(A-Z), aisle(A-Z), shelf(1-6)." << endl;
+                        cin.clear();
+                        cin.ignore(1000, '\n'); // Clear invalid input
+                    } else {
+                        break;
+                    }
+                } (while true);
 
                 Date created(month, day, year);
                 Location location(floor, section, aisle, shelf);
@@ -109,67 +102,133 @@ int main() {
                 Item* newItem = nullptr;
                 switch (itemType) {
                     case 1: {
-                        cout << "Enter length in pages: ";
-                        cin >> lengthInPages;
+                        
+                        do {
+                            cout << "Enter length in pages: ";
+                            cin >> lengthInPages;
+                            if (cin.fail()) {
+                                cout << "Invalid input. Please enter an integer." << endl;
+                                cin.clear();
+                                cin.ignore(1000, '\n'); // Clear invalid input
+                            } else{
+                                break;
+                            }
+                        } (while true);
 
-                        if (cin.fail()) {
-                            cout << "Invalid input. Please enter an integer.\n";
-                            cin.clear();
-                            clearInputBuffer();
-                            break;
-                        }
-                        clearInputBuffer();
-
-                        cout << "Enter author: ";
-                        getline(cin, author);
-                        cout << "Enter publisher: ";
-                        getline(cin, publisher);
+                        do {
+                            cout << "Enter author: ";
+                            cin.ignore(); // Ignore leftover newline
+                            getline(cin, author);
+                            if (cin.fail()) {
+                                cout << "Invalid input. Please enter a name.\n";
+                                cin.clear();
+                                cin.ignore(1000, '\n'); // Clear invalid input
+                            } else {
+                                break;
+                            }
+                        } (while true);
+                        do {
+                            cout << "Enter publisher: ";
+                            getline(cin, publisher);
+                            if (cin.fail()) {
+                                cout << "Invalid input. Please enter a name.\n";
+                                cin.clear();
+                                cin.ignore(1000, '\n'); // Clear invalid input
+                            } else {
+                                break;
+                            }
+                        } (while true);
                         newItem = new Book(title, genre, created, location, lengthInPages, author, publisher);
-                        break;
                     }
                     case 2: {
                         float lengthFloat;
-                        cout << "Enter length in minutes: ";
-                        cin >> lengthFloat;
-
-                        if (cin.fail()) {
-                            cout << "Invalid input. Please enter a number.\n";
-                            cin.clear();
-                            clearInputBuffer();
-                            break;
-                        }
-                        clearInputBuffer();
-
-                        cout << "Enter artist: ";
-                        getline(cin, artist);
-                        cout << "Enter producer: ";
-                        getline(cin, producer);
-                        newItem = new CD(title, genre, created, location, lengthFloat, artist, producer);
-                        break;
-                    }
-                    case 3: {
-                        cout << "Enter length in minutes: ";
-                        cin >> length;
-
-                        if (cin.fail()) {
-                            cout << "Invalid input. Please enter an integer.\n";
-                            cin.clear();
-                            clearInputBuffer();
-                            break;
-                        }
-                        clearInputBuffer();
-
-                        cout << "Enter director: ";
-                        getline(cin, director);
-                        cout << "Enter cast (enter 'done' when finished):\n";
-                        while (true) {
-                            cout << "Enter actor: ";
-                            getline(cin, actor);
-                            if (actor == "done") {
+                        
+                        do {
+                            cout << "Enter length in minutes: ";
+                            cin >> lengthFloat;
+                            if (cin.fail()) {
+                                cout << "Invalid input. Please enter a number.\n";
+                                cin.clear();
+                                cin.ignore(1000, '\n'); // Clear invalid input
+                            } else {
                                 break;
                             }
-                            cast.push_back(actor);
-                        }
+                        } (while true);
+
+                        do {
+                            cout << "Enter artist: ";
+                            cin.ignore(); // Ignore leftover newline
+                            getline(cin, artist);
+                            if(cin.fail()){
+                                cout << "Invalid input. Please enter a name.\n";
+                                cin.clear();
+                                cin.ignore(1000, '\n'); // Clear invalid input
+                            } else {
+                                break;
+                            }
+                        } (while true);
+
+                        do{
+                            cout << "Enter producer: ";
+                            getline(cin, producer);
+                            if(cin.fail()){
+                                cout << "Invalid input. Please enter a name.\n";
+                                cin.clear();
+                                cin.ignore(1000, '\n'); // Clear invalid input
+                            } else {
+                                break;
+                            }
+                        } (while true);
+                        newItem = new CD(title, genre, created, location, lengthFloat, artist, producer);
+                    }
+                    case 3: {
+                        do{
+                            cout << "Enter length in minutes: ";
+                            cin >> length;
+                            if (cin.fail()) {
+                                cout << "Invalid input. Please enter in integers.\n";
+                                cin.clear();
+                                cin.ignore(1000, '\n'); // Clear invalid input
+                            } else {
+                                break;
+                            }
+                        } (while true);
+
+                        do {
+                            cout << "Enter director: ";
+                            cin.ignore(); // Ignore leftover newline
+                            getline(cin, director);
+                            if (cin.fail()) {
+                                cout << "Invalid input. Please enter a name.\n";
+                                cin.clear();
+                                cin.ignore(1000, '\n'); // Clear invalid input
+                            } else {
+                                break;
+                            }
+                        } (while true);
+                        do{
+                            cout << "Enter cast (name name name...):\n";
+                            
+                            if (cin.fail()) {
+                                cout << "Invalid input. Please enter a names.\n";
+                                cin.clear();
+                                cin.ignore(1000, '\n'); // Clear invalid input
+                            } else {
+                                break;
+                            }
+                        } while (true)
+                        do {
+                            cout << "Enter cast (name name name...):\n";
+                            getline(cin, cast);
+                            if (cin.fail()) {
+                                cout << "Invalid input. Please enter names.\n";
+                                cin.clear();
+                                cin.ignore(1000, '\n'); // Clear invalid input
+                            } else if (cast == "done") {
+                                break; // Exit the loop when the user types "done"
+                            }
+                            cast.push_back(cast); // Add the actor to the cast list
+                        } (while true)
                         newItem = new Movie(title, genre, created, location, length, director, cast);
                         break;
                     }
@@ -184,10 +243,21 @@ int main() {
                 }
                 break;
             }
-            case 2: {
+            case '2': {
                 string searchTitle;
-                cout << "Enter title to search: ";
-                getline(cin, searchTitle);
+                
+                do {
+                    cout << "Enter title to search: ";
+                    cin.ignore(); // Ignore leftover newline
+                    getline(cin, searchTitle);
+                    if (cin.fail()) {
+                        cout << "Invalid input. Please enter a title.\n";
+                        cin.clear();
+                        cin.ignore(1000, '\n'); // Clear invalid input
+                    } else {
+                        break;
+                    }
+                } (while true);
                 Item* retrievedItem = library.retrieve(searchTitle);
                 if (retrievedItem != nullptr) {
                     cout << "Item found:\n";
@@ -198,13 +268,15 @@ int main() {
                 }
                 break;
             }
-            case 3:
+            case '3': {
                 library.sort();
                 cout << "Library sorted.\n";
                 break;
-            case 4: {
+            }
+            case '4': {
                 string removeTitle;
                 cout << "Enter title to remove: ";
+                cin.ignore(); // Ignore leftover newline
                 getline(cin, removeTitle);
                 if (library.remove(removeTitle)) {
                     cout << "Item removed successfully.\n";
@@ -213,31 +285,37 @@ int main() {
                 }
                 break;
             }
-            case 5:
+            case '5': {
                 cout << "Number of items: " << library.countItems() << endl;
                 break;
-            case 6:
+            }
+            case '6': {
                 if (library.isEmpty()) {
                     cout << "Library is empty.\n";
                 } else {
                     cout << "Library is not empty.\n";
                 }
                 break;
-            case 7:
+            }
+            case '7': {
                 library.clear();
                 cout << "Library cleared.\n";
                 break;
-            case 8:
+            }
+            case '8': {
                 cout << "All items in the library:\n";
                 library.printAllItems();
                 break;
-            case 0:
+            }
+            case '0': {
                 cout << "Exiting program.\n";
                 break;
-            default:
+            }
+            default: {
                 cout << "Invalid choice. Please try again.\n";
+            }
         }
-    } while (choice != 0);
+    } while (choice != '0');
 
     return 0;
 }

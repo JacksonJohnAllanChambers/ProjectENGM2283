@@ -17,9 +17,9 @@ public:
     ~LinkedList();
 
     void store(Item* item);
-    Item* retrieve(std::string title);
+    Item* retrieve(string title);
     void sort();
-    bool remove(std::string title);
+    bool remove(string title);
     int countItems() const;
     bool isEmpty() const;
     void clear();

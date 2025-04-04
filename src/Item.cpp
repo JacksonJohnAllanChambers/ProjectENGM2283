@@ -1,17 +1,17 @@
 #include "Item.h"
 #include <iostream>
 
-Item::Item(std::string title, int genre, Date created, Location location)
+Item::Item(string title, int genre, Date created, Location location)
     : title(title), genre(genre), created(created), location(location) {}
 
 void Item::print() const {
-    std::cout << "Title: " << title << ", Genre: " << genre << ", Created: ";
+    cout << "Title: " << title << ", Genre: " << genre << ", Created: ";
     created.print();
-    std::cout << ", Location: ";
+    cout << ", Location: ";
     location.print();
 }
 
-std::string Item::getTitle() const {
+string Item::getTitle() const {
     return title;
 }
 

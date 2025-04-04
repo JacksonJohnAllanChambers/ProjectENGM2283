@@ -3,22 +3,23 @@
 
 #include <string>
 #include <iostream>
+using namespace std;
 
 class Location {
 private:
     int floor;
-    std::string section;
-    std::string aisle;
+    string section;
+    string aisle;
     int shelf;
 
 public:
-    Location(int floor = 1, std::string section = "General", std::string aisle = "A", int shelf = 1);
+    Location(int floor = 1, string section = "General", string aisle = "A", int shelf = 1);
     void print() const;
 
     // Getters
     int getFloor() const;
-    std::string getSection() const;
-    std::string getAisle() const;
+    string getSection() const;
+    string getAisle() const;
     int getShelf() const;
 };
 

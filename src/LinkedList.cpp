@@ -15,7 +15,7 @@ void LinkedList::store(Item* item) {
     count++;
 }
 
-Item* LinkedList::retrieve(std::string title) {
+Item* LinkedList::retrieve(string title) {
     Node* current = head;
     while (current != nullptr) {
         if (current->data->getTitle() == title) {
@@ -30,7 +30,7 @@ void LinkedList::sort() {
     sortList();
 }
 
-bool LinkedList::remove(std::string title) {
+bool LinkedList::remove(string title) {
     Node* current = head;
     Node* previous = nullptr;
 
@@ -114,7 +114,7 @@ void LinkedList::printAllItems() const {
     Node* current = head;
     while (current != nullptr) {
         current->data->print();
-        std::cout << std::endl;
+        cout << endl;
         current = current->next;
     }
 }

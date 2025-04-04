@@ -8,18 +8,18 @@
 class Movie : public Item {
 private:
     int length; // Minutes
-    std::string director;
-    std::vector<std::string> cast;
+    string director;
+    vector<string> cast;
 
 public:
-    Movie(std::string title = "Unknown", int genre = 0, Date created = Date(), Location location = Location(),
-          int length = 0, std::string director = "Unknown", std::vector<std::string> cast = {});
+    Movie(string title = "Unknown", int genre = 0, Date created = Date(), Location location = Location(),
+          int length = 0, string director = "Unknown", vector<string> cast = {});
     void print() const override;
 
     // Getters
     int getLength() const;
-    std::string getDirector() const;
-    std::vector<std::string> getCast() const;
+    string getDirector() const;
+    vector<string> getCast() const;
 };
 
 #endif
