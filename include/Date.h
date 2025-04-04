@@ -10,7 +10,7 @@ class Date{
         int day;
         int year;
     public:
-        Date(int m = 1, int d = 1, int y = 2025);
+        Date(int m = 1, int d = 1, int y = 2000);
 
         bool operator>(const Date& other) const;
         bool operator<(const Date& other) const;
