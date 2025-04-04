@@ -1,3 +1,5 @@
+// Add anticheck, call clear at exit
+
 #include <iostream>
 #include <string>
 
@@ -14,7 +16,7 @@ int main() {
     LinkedList library;
     char choice;
 
-    while(1) {
+    do {
         cout << "\n\n---------------------Library Menu-------------------" << endl;
         cout << "1. Store Item" << endl;
         cout << "2. Retrieve Item" << endl;
@@ -25,20 +27,28 @@ int main() {
         cout << "7. Clear Library" << endl;
         cout << "8. Print All Items" << endl;
         cout << "0. Exit" << endl;
-        
         cout << "Enter your choice: ";
         cin >> choice;
 
-        if (choice = 1  ) {
+        switch (choice) {
+            case '1': {
                 int itemType;
-            
-                cout << endl << "---------------------Item Menu-------------------"<< endl;
-                cout << "1. Book" << endl;
-                cout << "2. CD" << endl;
-                cout << "3. Movie" << endl;
-                cout << "Enter here: ";
-                cin >> itemType;
+                do {
+                    cout << "\n\n---------------------Item Menu-------------------\n";
+                    cout << "1. Book" << endl;
+                    cout << "2. CD" << endl;
+                    cout << "3. Movie" << endl;
+                    cout << "Enter here: ";
+                    cin >> itemType;
 
+                    if (cin.fail() || (itemType < 1 || itemType > 3)) {
+                        cout << "Invalid input. Please enter an integer between 1 and 3.\n";
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                    } else {
+                        break;
+                    }
+                } while (true);
 
                 string title, author, publisher, artist, producer, director;
                 int genre, lengthInPages, length;
@@ -48,17 +58,46 @@ int main() {
                 string actor;
 
                 cout << "Enter title: ";
+                cin.ignore();
                 getline(cin, title);
 
-                
+                do {
                     cout << "Enter genre (Dewey decimal system): ";
-                    cin >> genre;                   
+                    cin >> genre;
+                    if (cin.fail() || genre < 0 || genre > 999){
+                        cout << "Invalid input. Please enter an integer between 0 - 999.\n";
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                    } else {
+                        break;
+                    }
+                } while (true);
+                
+                do{
                     cout << "Enter publishing date (month day year): ";
                     cin >> month >> day >> year;
+                    if (cin.fail() || month < 1 || month > 12 || day < 1 ||
+                     day > 31 || year < 1 || year > 2025){
+                        cout << "Invalid input. Please enter a integers; month(1-12), day(1-31), year(0-2025)." << endl;
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                    } else {
+                        break;
+                    }
+                } while (true);
+
+                do {
                     cout << "Enter location (floor section aisle shelf): ";
                     cin >> floor >> section >> aisle >> shelf;
 
-            
+                    if (cin.fail() || floor < 1 || floor > 30 || section < 'A' || section > 'Z' || aisle < 'A' || aisle > 'Z' || shelf < 1 || shelf > 6) {
+                        cout << "Invalid input. Please enter; floor(1-30), section(A-Z), aisle(A-Z), shelf(1-6)." << endl;
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                    } else {
+                        break;
+                    }
+                } while (true);
 
                 Date created(month, day, year);
                 Location location(floor, section, aisle, shelf);
@@ -72,8 +111,8 @@ int main() {
                             cin >> lengthInPages;
                             if (cin.fail()) {
                                 cout << "Invalid input. Please enter an integer." << endl;
-                                cin.clear(); // Clear invalid input
-                                cin.ignore(1000, '\n'); // Ignore leftover newline
+                                cin.clear();
+                                cin.ignore(1000, '\n');
                             } else{
                                 break;
                             }
@@ -154,7 +193,7 @@ int main() {
                             if (cin.fail()) {
                                 cout << "Invalid input. Please enter in integers.\n";
                                 cin.clear();
-                                cin.ignore(1000, '\n'); 
+                                cin.ignore(1000, '\n');
                             } else {
                                 break;
                             }
@@ -172,15 +211,15 @@ int main() {
                                 break;
                             }
                         } while (true);
-                        vector<string> cast; // Vector to store cast members
+                        vector<string> cast;
                         do {
                             cout << "Enter cast (type 'done' to finish): ";
-                            string actor; // Temporary variable to store input
+                            string actor;
                             getline(cin, actor);
                             if (actor == "done") {
-                                break; // Exit the loop when the user types "done"
+                                break;
                             }
-                            cast.push_back(actor); // Add the actor to the cast list
+                            cast.push_back(actor);
                         } while (true);
                         newItem = new Movie(title, genre, created, location, length, director, cast);
                         break;
@@ -197,44 +236,56 @@ int main() {
                 break;
             }
             case '2': {
-                string searchTitle;
-                
-                do {
-                    cout << "Enter title to search: ";
-                    cin.ignore(); // Ignore leftover newline
-                    getline(cin, searchTitle);
-                    if (cin.fail()) {
-                        cout << "Invalid input. Please enter a title.\n";
-                        cin.clear();
-                        cin.ignore(1000, '\n');
-                    } else {
-                        break;
-                    }
-                } while (true);
-                Item* retrievedItem = library.retrieve(searchTitle);
-                if (retrievedItem != nullptr) {
-                    cout << "Item found:\n";
-                    retrievedItem->print();
-                    cout << endl;
+                if (library.isEmpty()){
+                    cout << "Library is empty.\n";
                 } else {
-                    cout << "Item not found.\n";
+                    string searchTitle;
+
+                    do {
+                        cout << "Enter title to search: ";
+                        cin.ignore();
+                        getline(cin, searchTitle);
+                        if (cin.fail()) {
+                            cout << "Invalid input. Please enter a title.\n";
+                            cin.clear();
+                            cin.ignore(1000, '\n');
+                        } else {
+                            break;
+                        }
+                    } while (true);
+                    Item* retrievedItem = library.retrieve(searchTitle);
+                    if (retrievedItem != nullptr) {
+                        cout << "Item found:\n";
+                        retrievedItem->print();
+                        cout << endl;
+                    } else {
+                        cout << "Item not found.\n";
+                    }
                 }
                 break;
             }
             case '3': {
-                library.sort();
-                cout << "Library sorted.\n";
+                if (library.isEmpty()){
+                    cout << "Library is empty.\n";
+                } else{
+                    library.sort();
+                    cout << "Library sorted.\n";
+                }
                 break;
             }
             case '4': {
-                string removeTitle;
-                cout << "Enter title to remove: ";
-                cin.ignore();
-                getline(cin, removeTitle);
-                if (library.remove(removeTitle)) {
-                    cout << "Item removed successfully.\n";
+                if (library.isEmpty()) {
+                    cout << "Library is empty.\n";
                 } else {
-                    cout << "Item not found.\n";
+                    string removeTitle;
+                    cout << "Enter title to remove: ";
+                    cin.ignore();
+                    getline(cin, removeTitle);
+                    if (library.remove(removeTitle)) {
+                        cout << "Item removed successfully.\n";
+                    } else {
+                        cout << "Item not found.\n";
+                    }
                 }
                 break;
             }
@@ -251,17 +302,26 @@ int main() {
                 break;
             }
             case '7': {
-                library.clear();
-                cout << "Library cleared.\n";
+                if (library.isEmpty()){
+                    cout << "Library is empty.\n";
+                } else{
+                    library.clear();
+                    cout << "Library cleared.\n";
+                }
                 break;
             }
             case '8': {
-                cout << "All items in the library:\n";
-                library.printAllItems();
+                if (library.isEmpty()){
+                    cout << "Library is empty.\n";
+                } else{
+                    cout << "All items in the library:\n";
+                    library.printAllItems();
+                }
                 break;
             }
             case '0': {
                 cout << "Exiting program.\n";
+                library.clear();
                 break;
             }
             default: {

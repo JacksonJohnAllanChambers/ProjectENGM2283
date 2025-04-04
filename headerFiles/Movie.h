@@ -7,7 +7,7 @@
 
 class Movie : public Item {
 private:
-    int length; // Minutes
+    int length;
     string director;
     vector<string> cast;
 

@@ -3,13 +3,16 @@
 
 #include "Item.h"
 
+class Node {
+public:
+    Item* data;
+    Node* next;
+
+    Node(Item* item = nullptr, Node* nextNode = nullptr) : data(item), next(nextNode) {}
+};
+
 class LinkedList {
 private:
-    class Node {
-    public:
-        Item* data;
-        Node* next;
-    };
     Node* start;
     int count;
 

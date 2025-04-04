@@ -1,28 +1,44 @@
-#include "Item.h"
+#include "Date.h"
 #include <iostream>
 
-Item::Item(string title, int genre, Date created, Location location)
-    : title(title), genre(genre), created(created), location(location) {}
+using namespace std;
 
-void Item::print() const {
-    cout << "Title: " << title << ", Genre: " << genre << ", Created: ";
-    created.print();
-    cout << ", Location: ";
-    location.print();
+Date::Date(int m, int d, int y) : month(m), day(d), year(y) {}
+
+bool Date::operator>(const Date& other) const {
+    if (year > other.year) return true;
+    if (year == other.year && month > other.month) return true;
+    if (year == other.year && month == other.month && day > other.day) return true;
+    return false;
 }
 
-string Item::getTitle() const {
-    return title;
+bool Date::operator<(const Date& other) const {
+    if (year < other.year) return true;
+    if (year == other.year && month < other.month) return true;
+    if (year == other.year && month == other.month && day < other.day) return true;
+    return false;
 }
 
-int Item::getGenre() const {
-    return genre;
+bool Date::operator==(const Date& other) const {
+    return (year == other.year && month == other.month && day == other.day);
 }
 
-Date Item::getCreated() const {
-    return created;
+void Date::print() const {
+    const char* months[] = {
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    };
+    cout << months[month - 1] << " " << day << ", " << year;
+} 
+
+int Date::getMonth() const {
+    return month;
 }
 
-Location Item::getLocation() const {
-    return location;
+int Date::getDay() const {
+    return day;
+} 
+
+int Date::getYear() const {
+    return year;
 }
