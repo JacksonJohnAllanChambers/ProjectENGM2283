@@ -15,7 +15,7 @@ int main() {
     char choice;
 
     do {
-        cout << "---------------------Library Menu-------------------" << endl;
+        cout << "\n\n---------------------Library Menu-------------------" << endl;
         cout << "1. Store Item" << endl;
         cout << "2. Retrieve Item" << endl;
         cout << "3. Sort Items" << endl;
@@ -32,10 +32,11 @@ int main() {
             case '1': {
                 int itemType;
                 do {
-                    cout << "'\n'---------------------Item Menu-------------------";
+                    cout << "\n\n---------------------Item Menu-------------------\n";
                     cout << "1. Book" << endl;
                     cout << "2. CD" << endl;
                     cout << "3. Movie" << endl;
+                    cout << "Enter here: ";
                     cin >> itemType;
 
                     if (cin.fail() || (itemType < 1 || itemType > 3)) {
