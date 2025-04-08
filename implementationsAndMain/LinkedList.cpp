@@ -3,6 +3,10 @@
 
 LinkedList::LinkedList() : start(nullptr), count(0) {}
 
+LinkedList::~LinkedList() {
+    clear(); 
+}
+
 void LinkedList::store(Item* item) {
     Node* newNode = new Node;
     newNode->data = item;

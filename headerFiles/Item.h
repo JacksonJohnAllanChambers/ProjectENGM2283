@@ -16,6 +16,7 @@ protected:
 public:
     Item(string title = "Unknown", int genre = 0, Date created = Date(), Location location = Location());
     virtual void print() const;
+    virtual ~Item() {}
 
     string getTitle() const;
     int getGenre() const;

@@ -18,7 +18,7 @@ private:
 
 public:
     LinkedList();
-
+    ~LinkedList();
     void store(Item* item);
     Item* retrieve(string title);
     void sort();
